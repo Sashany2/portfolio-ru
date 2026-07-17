@@ -345,8 +345,18 @@ section{
 }
 @media (max-width:820px){
   .hero-inner{max-width:100%}
-  #figure{width:100vw;opacity:.5}
-  .nogl .figure-fallback{right:-10vw;width:70vw;opacity:.55}
+  /* на мобиле фигура во всю ширину ложится под текст — глушим её и кладём
+     скрим между частицами и текстом, иначе мелкий моно-текст тонет */
+  #figure{width:100vw;opacity:.32}
+  .figure-wrap::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,
+      rgba(10,10,11,.60) 0%,
+      rgba(10,10,11,.70) 40%,
+      rgba(10,10,11,.70) 74%,
+      rgba(10,10,11,.44) 100%);
+  }
+  .nogl .figure-fallback{right:-10vw;width:70vw;opacity:.4}
 }
 
 /* ==========================================================================
