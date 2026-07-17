@@ -1445,13 +1445,9 @@ body.co-lock{overflow:hidden}
     window.addEventListener('resize', resize);
 
     /* мышь: целимся в px-координаты холста, сглаживаем на CPU */
+    // курсор-эффект отключён: частицы просто «дышат», без разлёта от указателя.
+    // (на телефоне тап рисовал кружок, да и на десктопе он лишний — убрали.)
     var mx = -9999, my = -9999, tx = -9999, ty = -9999;
-    window.addEventListener('pointermove', function(e){
-      var r = canvas.getBoundingClientRect();
-      tx = (e.clientX - r.left) * dpr;
-      ty = (e.clientY - r.top) * dpr;
-    }, { passive:true });
-    window.addEventListener('pointerleave', function(){ tx = -9999; ty = -9999; });
 
     function draw(t){
       mx += (tx - mx) * 0.14;
